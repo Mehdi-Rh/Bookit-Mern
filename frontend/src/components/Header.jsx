@@ -1,150 +1,140 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { grey } from "@mui/material/colors";
-import LoginIcon from "@mui/icons-material/Login";
-import PersonIcon from "@mui/icons-material/Person";
-import ApartmentIcon from "@mui/icons-material/Apartment";
-import LogoutIcon from "@mui/icons-material/Logout";
+// import { useRouter } from "next/navigation";
+
+import { FaUser, FaSignInAlt, FaSignOutAlt, FaBuilding } from "react-icons/fa";
+import { toast } from "react-toastify";
+// import destroySession from "@/app/actions/destroySession";
+// import { useAuth } from "@/context/authContext";
 import logo from "../assets/logo.svg";
-import { Link } from "@mui/material";
-const drawerWidth = 240;
-const navItems = ["Login", "Register", "My Rooms", "Sign Out"];
 
-const RightNavItems = [
-  { label: "Login", icon: <LoginIcon /> },
-  { label: "Register", icon: <PersonIcon /> },
-  { label: "My Rooms", icon: <ApartmentIcon /> },
-  { label: "Sign Out", icon: <LogoutIcon /> },
-];
+const Header = () => {
+  // const router = useRouter();
 
-const LeftNavItems = ["Rooms", "Bookings", "Add Room"];
+  // const { isAuthenticated, setIsAuthenticated } = useAuth();
 
-function Header(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  // const handleLogout = async () => {
+  //   const { success, error } = await destroySession();
 
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
-  };
-
-  const drawer = (
-    <Box
-      onClick={handleDrawerToggle}
-      sx={{
-        textAlign: "center",
-        background: "grey[200]",
-        height: "100%",
-        color: grey[900],
-      }}
-    >
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
-      <Divider />
-      <List sx={{ color: grey[900], border: "1px solid red" }}>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding sx={{ color: grey[900] }}>
-            <ListItemButton sx={{ textAlign: "center", color: grey[900] }}>
-              <ListItemText primary={item} sx={{ color: grey[900] }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  //   if (success) {
+  //     setIsAuthenticated(false);
+  //     router.push("/login");
+  //   } else {
+  //     toast.error(error);
+  //   }
+  // };
 
   return (
-    <>
-      <CssBaseline />
-      <AppBar component="nav" sx={{ background: grey[200], color: grey[900] }}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "flex" } }}>
-            <Link href="/" alignContent="center">
+    <header className="bg-gray-100">
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          <div className="flex items-center">
+            <a href="/">
               <img
+                className="h-12 w-12"
                 src={logo}
                 alt="Bookit"
-                style={{ width: "30px", height: "30px" }}
+                priority={true}
               />
-            </Link>
-            {LeftNavItems.map((item) => (
-              <Button key={item} sx={{ color: grey[900] }}>
-                {item}
-              </Button>
-            ))}
-          </Box>
-          <Box
-            sx={{
-              display: { xs: "none", sm: "block" },
-            }}
-          >
-            {RightNavItems.map((item) => (
-              <Button
-                key={item}
-                startIcon={item.icon}
-                sx={{ color: grey[900] }}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </nav>
-    </>
-  );
-}
+            </a>
+            <div className="hidden md:block">
+              <div className="ml-10 flex items-baseline space-x-4">
+                <a
+                  href="/"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                >
+                  Rooms
+                </a>
+                {/* <!-- Logged In Only --> */}
+                {/* {isAuthenticated && ( */}
+                <>
+                  <a
+                    href="/bookings"
+                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                  >
+                    Bookings
+                  </a>
+                  <a
+                    href="/rooms/add"
+                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                  >
+                    Add Room
+                  </a>
+                </>
+                {/* )} */}
+              </div>
+            </div>
+          </div>
+          {/* <!-- Right Side Menu --> */}
+          <div className="ml-auto">
+            <div className="ml-4 flex items-center md:ml-6">
+              {/* <!-- Logged Out Only --> */}
+              {/* {!isAuthenticated && ( */}
+              <>
+                <a
+                  href="/login"
+                  className="mr-3 text-gray-800 hover:text-gray-600"
+                >
+                  <FaSignInAlt className="inline mr-1" /> Login
+                </a>
+                <a
+                  href="/register"
+                  className="mr-3 text-gray-800 hover:text-gray-600"
+                >
+                  <FaUser className="inline mr-1" /> Register
+                </a>
+              </>
+              {/* )} */}
 
-Header.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
+              {/* {isAuthenticated && ( */}
+              <>
+                <a href="/rooms/my">
+                  <FaBuilding className="inline mr-1" /> My Rooms
+                </a>
+                <button
+                  // onClick={handleLogout}
+                  onClick={() => {
+                    console.log("Log out");
+                  }}
+                  className="mx-3 text-gray-800 hover:text-gray-600"
+                >
+                  <FaSignOutAlt className="inline mr-1" /> Sign Out
+                </button>
+              </>
+              {/* )} */}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* <!-- Mobile menu --> */}
+      <div className="md:hidden">
+        <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+          <a
+            href="/"
+            className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+          >
+            Rooms
+          </a>
+          {/* <!-- Logged In Only --> */}
+          {/* {isAuthenticated && ( */}
+          <>
+            <a
+              href="/bookings"
+              className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+            >
+              Bookings
+            </a>
+            <a
+              href="/rooms/add"
+              className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+            >
+              Add Room
+            </a>
+          </>
+          {/* )} */}
+        </div>
+      </div>
+    </header>
+  );
 };
 
 export default Header;

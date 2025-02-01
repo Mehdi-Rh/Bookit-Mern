@@ -1,22 +1,23 @@
-import { Box } from "@mui/material";
 import rooms from "../data/rooms";
 import RoomCard from "../components/RoomCard";
+import Heading from '../components/Heading';
+ 
 
-const Home = () => {
+const  Home=() =>{
+  // const rooms = await getAllRooms();
+
   return (
     <div
-      style={{
-        marginTop: "68px",
-        width: "100% ",
-        marginBottom: "3rem",
-      }}
-      className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8"
-    >
-      {rooms.length > 0
-        ? rooms.map((room) => <RoomCard key={room.id} room={room} />)
-        : "No rooms available at the moment"}
+    className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8"
+  >
+      <Heading title='Available Rooms' />
+      {rooms.length > 0 ? (
+        rooms.map((room) => <RoomCard room={room} key={room.id} />)
+      ) : (
+        <p>No rooms available at the moment</p>
+      )}
     </div>
   );
-};
+}
 
 export default Home;

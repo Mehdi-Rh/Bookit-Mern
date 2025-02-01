@@ -1,23 +1,14 @@
-import { Box } from "@mui/material";
-import { grey } from "@mui/material/colors";
-import { right } from "../../../node_modules/@popperjs/core/dist/esm/enums";
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
 
-export const Footer = () => {
   return (
-    <Box
-      sx={{
-        position: "fixed",
-        bottom: 0,
-        width: "100%",
-        height: "3rem",
-        background: grey[200],
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      @ 2024 Bookit. All rights reserved.
-    </Box>
+    <footer className="py-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p className="text-center text-sm text-gray-600">
+          &copy; {currentYear} Bookit. All rights reserved.
+        </p>
+      </div>
+    </footer>
   );
 };
 
