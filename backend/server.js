@@ -1,29 +1,40 @@
+require("dotenv").config();
+
 const express = require("express");
-const dotenv = require("dotenv");
-const cors = require("cors");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
-dotenv.config();
-
+// express app
 const app = express();
 
-// Middleware
+// middleware
 app.use(express.json());
 app.use(cors());
 
-// Simple route
-app.get("/", (req, res) => {
-  res.send("API is running...");
+app.use((req, res, next) => {
+  console.log("req.path", req.path);
+  console.log("req.method", req.method);
+  next();
 });
 
-// Connect to MongoDB
-const PORT = process.env.PORT || 5000;
-// const MONGO_URI = process.env.MONGO_URI;
+// connect to mongodb
+const dbURI = process.env.MONGO_URI;
+const port = process.env.PORT;
+mongoose
+  .connect(dbURI)
+  .then(() => {
+    app.listen(port, () =>
+      console.log("Connecting to db & listening to port ", port)
+    );
+  })
+  .catch((err) => console.log("MongDB connection error: ", err));
 
-// mongoose
-//   .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(() => {
-//     console.log("MongoDB Connected");
-//     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-//   })
-//   .catch((err) => console.error("MongoDB connection error:", err));
+// // routes
+app.get("/", (req, res) => {
+  res.json({ message: "WELCOME" });
+});
+const roomsRoutes = require("./routes/roomRoute");
+app.use("/api/rooms", roomsRoutes);
+
+// const usersRoutes = require("./routes/userRoute");
+// app.use("/api/user", usersRoutes);
