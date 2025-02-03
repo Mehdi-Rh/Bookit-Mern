@@ -1,4 +1,4 @@
-// import { useRouter } from "next/navigation";
+import { Link } from "react-router-dom";
 
 import { FaUser, FaSignInAlt, FaSignOutAlt, FaBuilding } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -27,37 +27,32 @@ const Header = () => {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <a href="/">
-              <img
-                className="h-12 w-12"
-                src={logo}
-                alt="Bookit"
-                priority={true}
-              />
-            </a>
+            <Link to="/">
+              <img className="h-12 w-12" src={logo} alt="Bookit" />
+            </Link>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
                 >
                   Rooms
-                </a>
+                </Link>
                 {/* <!-- Logged In Only --> */}
                 {/* {isAuthenticated && ( */}
                 <>
-                  <a
-                    href="/bookings"
+                  <Link
+                    to="/bookings"
                     className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
                   >
                     Bookings
-                  </a>
-                  <a
-                    href="/rooms/add"
+                  </Link>
+                  <Link
+                    to="/rooms/add"
                     className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
                   >
                     Add Room
-                  </a>
+                  </Link>
                 </>
                 {/* )} */}
               </div>
@@ -69,26 +64,26 @@ const Header = () => {
               {/* <!-- Logged Out Only --> */}
               {/* {!isAuthenticated && ( */}
               <>
-                <a
-                  href="/login"
+                <Link
+                  to="/login"
                   className="mr-3 text-gray-800 hover:text-gray-600"
                 >
                   <FaSignInAlt className="inline mr-1" /> Login
-                </a>
-                <a
-                  href="/register"
+                </Link>
+                <Link
+                  to="/register"
                   className="mr-3 text-gray-800 hover:text-gray-600"
                 >
                   <FaUser className="inline mr-1" /> Register
-                </a>
+                </Link>
               </>
               {/* )} */}
 
               {/* {isAuthenticated && ( */}
               <>
-                <a href="/rooms/my">
+                <Link to="/rooms/my">
                   <FaBuilding className="inline mr-1" /> My Rooms
-                </a>
+                </Link>
                 <button
                   // onClick={handleLogout}
                   onClick={() => {
@@ -108,27 +103,27 @@ const Header = () => {
       {/* <!-- Mobile menu --> */}
       <div className="md:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
           >
             Rooms
-          </a>
+          </Link>
           {/* <!-- Logged In Only --> */}
           {/* {isAuthenticated && ( */}
           <>
-            <a
-              href="/bookings"
+            <Link
+              to="/bookings"
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
             >
               Bookings
-            </a>
-            <a
-              href="/rooms/add"
+            </Link>
+            <Link
+              to="/rooms/add"
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
             >
               Add Room
-            </a>
+            </Link>
           </>
           {/* )} */}
         </div>
