@@ -5,17 +5,32 @@
 import { FaChevronLeft } from "react-icons/fa";
 // import getSingleRoom from "@/app/actions/getSingleRoom";
 import { Link, useParams } from "react-router-dom";
-import rooms from "../data/rooms";
-import Heading from "../components/Heading";
-import BookingForm from "../components/BookingForm";
+import Heading from "../../components/Heading";
+import BookingForm from "../../components/BookingForm";
+import { useEffect, useState } from "react";
 
 const RoomDetails = () => {
   const params = useParams();
   const { id } = params;
+  console.log({ id });
 
-  const room = rooms.find((room) => room.$id === id);
+  const [room, setRoom] = useState(null);
+
+  useEffect(() => {
+    const getRoom = async () => {
+      const response = await fetch(`http://localhost:5000/api/rooms/${id}`);
+
+      const data = await response.json();
+      console.log({ data });
+
+      setRoom(data);
+    };
+
+    getRoom();
+  }, []);
+
+  console.log({ room });
   //   const room = await getSingleRoom(id);
-  const imageSrc = `/images/rooms/${room.image}`;
 
   //   const bucketId = process.env.NEXT_PUBLIC_APPWRITE_STORAGE_BUCKET_ROOMS;
   //   const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT;
@@ -27,6 +42,8 @@ const RoomDetails = () => {
   if (!room) {
     return <Heading title="Room Not Found" />;
   }
+  const imageSrc = `/images/rooms/${room.image}`;
+
   return (
     <>
       <Heading title={room.name} />

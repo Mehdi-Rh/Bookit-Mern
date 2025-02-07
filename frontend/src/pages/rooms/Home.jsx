@@ -1,6 +1,5 @@
-import rooms from "../data/rooms";
-import RoomCard from "../components/RoomCard";
-import Heading from "../components/Heading";
+import RoomCard from "../../components/RoomCard";
+import Heading from "../../components/Heading";
 import { useEffect, useState } from "react";
 
 const Home = () => {
