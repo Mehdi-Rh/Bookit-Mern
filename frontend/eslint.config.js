@@ -68,6 +68,9 @@ export default [
       // ✅ React-Specific Adjustments
       "react/jsx-no-target-blank": "off",
       "react/prop-types": "off",
+
+      // ✅ Undefined Variables as Error
+      "no-undef": "error",
     },
   },
 ];
