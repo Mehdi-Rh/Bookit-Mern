@@ -1,35 +1,37 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Link, redirect } from "react-router";
+import { useRegister } from "../../hooks/useRegister";
 // import createUser from '@/app/actions/createUser';
 
 const RegisterPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitSuccessful },
-  } = useForm();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const onSubmit = async (data) => {
-    console.log({ signup: data });
-    // await signup(data.name, data.email, data.password);
+  const { signup, error, isLoading, namez } = useRegister();
+
+  console.log({ namez });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await signup(name, email, password);
   };
 
   useEffect(() => {
-    if (errors) toast.error(errors);
+    if (error) toast.error(error);
     // if (errors) toast.error("An error occurred");
-    if (isSubmitSuccessful) {
-      toast.success("You can now log in!");
-      redirect("/login");
-    }
-  }, [errors, isSubmitSuccessful]);
+    toast.success("You can now log in!");
+    redirect("/login");
+  }, [error, isLoading]);
+
   return (
     <div className="flex items-center justify-center w-auto md:w-md">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-sm mt-20">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit}>
           <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
             Register
           </h2>
@@ -43,10 +45,10 @@ const RegisterPage = () => {
             <input
               type="text"
               id="name"
-              name="name"
               className="border rounded w-full py-2 px-3"
-              {...register("name", { required: true })}
               required
+              onChange={(e) => setName(e.target.value)}
+              value={name}
             />
           </div>
 
@@ -64,6 +66,8 @@ const RegisterPage = () => {
               className="border rounded w-full py-2 px-3"
               autoComplete="email"
               required
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
           </div>
 
@@ -81,9 +85,11 @@ const RegisterPage = () => {
               className="border rounded w-full py-2 px-3"
               required
               autoComplete="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
             />
           </div>
-
+          {/* 
           <div className="mb-6">
             <label
               htmlFor="confirm-password"
@@ -99,12 +105,13 @@ const RegisterPage = () => {
               autoComplete="confirm-password"
               required
             />
-          </div>
+          </div> */}
 
           <div className="flex flex-col gap-5">
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+              disabled={isLoading || false}
             >
               Register
             </button>
