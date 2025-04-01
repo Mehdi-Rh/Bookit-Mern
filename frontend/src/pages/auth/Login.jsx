@@ -1,11 +1,12 @@
 // import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect } from 'react';
 // import { useFormState } from "react-dom";
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 // import createSession from "../actions/createSession";
 // import { useAuth } from "@/context/authContext";
-import { Link, redirect } from "react-router";
-import { useForm } from "react-hook-form";
+import { Link, redirect } from 'react-router';
+import { useForm } from 'react-hook-form';
+import { useLogin } from '../../hooks/useLogin';
 
 const LoginPage = () => {
   const {
@@ -14,19 +15,27 @@ const LoginPage = () => {
     formState: { errors, isSubmitSuccessful },
   } = useForm();
 
-  // const { isAuthenticated, setIsAuthenticated } = useAuth();
-
+  const { login } = useLogin();
   const onSubmit = async (data) => {
-    console.log({ login: data });
-    // await signup(data.name, data.email, data.password);
+    console.log({ data });
+
+    await login(data.email, data.password);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log(data);
+    } catch (error) {
+      // setError('root', {
+      //   message: 'This email is already taken',
+      // });
+    }
   };
 
   useEffect(() => {
     if (errors) toast.error(errors);
     if (isSubmitSuccessful) {
-      toast.success("Logged in successfully!");
+      toast.success('Logged in successfully!');
       // setIsAuthenticated(true);
-      redirect("/");
+      redirect('/');
     }
   }, [errors, isSubmitSuccessful]);
 
@@ -34,41 +43,33 @@ const LoginPage = () => {
     <div className="flex items-center justify-center w-auto md:w-md">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-sm mt-20">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-            Login
-          </h2>
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
 
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 font-bold mb-2"
-            >
+            <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
               Email
             </label>
             <input
               type="email"
               id="email"
-              name="email"
               className="border rounded w-full py-2 px-3"
               autoComplete="email"
               required
+              {...register('email')}
             />
           </div>
 
           <div className="mb-6">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 font-bold mb-2"
-            >
+            <label htmlFor="password" className="block text-gray-700 font-bold mb-2">
               Password
             </label>
             <input
               type="password"
               id="password"
-              name="password"
               className="border rounded w-full py-2 px-3"
               autoComplete="password"
               required
+              {...register('password')}
             />
           </div>
 

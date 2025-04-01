@@ -1,4 +1,4 @@
-import { useAuthContext } from "./useAuthContext";
+import { useAuthContext } from './useAuthContext';
 // import { useTasksContext } from "./useTasksContext";
 
 export const useLogout = () => {
@@ -7,10 +7,10 @@ export const useLogout = () => {
 
   const logout = () => {
     // remove user from storage
-    localStorage.removeItem("user");
+    localStorage.removeItem('user');
 
     // dispatch logout action
-    dispatch({ type: "LOGOUT" });
+    dispatch({ type: 'LOGOUT' });
     // tasksDispatch({ type: "SET_TASKS", payload: null });
   };
 
