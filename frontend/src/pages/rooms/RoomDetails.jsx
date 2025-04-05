@@ -2,17 +2,16 @@
 // import BookingForm from "@/components/BookingForm";
 // import Image from "next/image";
 // import Link from "next/link";
-import { FaChevronLeft } from "react-icons/fa";
+import { FaChevronLeft } from 'react-icons/fa';
 // import getSingleRoom from "@/app/actions/getSingleRoom";
-import { Link, useParams } from "react-router-dom";
-import Heading from "../../components/Heading";
-import BookingForm from "../../components/BookingForm";
-import { useEffect, useState } from "react";
+import { Link, useParams } from 'react-router-dom';
+import Heading from '../../components/Heading';
+import BookingForm from '../../components/BookingForm';
+import { useEffect, useState } from 'react';
 
 const RoomDetails = () => {
   const params = useParams();
   const { id } = params;
-  console.log({ id });
 
   const [room, setRoom] = useState(null);
 
@@ -21,7 +20,6 @@ const RoomDetails = () => {
       const response = await fetch(`http://localhost:5000/api/rooms/${id}`);
 
       const data = await response.json();
-      console.log({ data });
 
       setRoom(data);
     };
@@ -29,7 +27,6 @@ const RoomDetails = () => {
     getRoom();
   }, []);
 
-  console.log({ room });
   //   const room = await getSingleRoom(id);
 
   //   const bucketId = process.env.NEXT_PUBLIC_APPWRITE_STORAGE_BUCKET_ROOMS;
@@ -48,10 +45,7 @@ const RoomDetails = () => {
     <>
       <Heading title={room.name} />
       <div className="bg-white shadow rounded-lg p-6">
-        <Link
-          to="/"
-          className="flex items-center text-gray-600 hover:text-gray-800 mb-4"
-        >
+        <Link to="/" className="flex items-center text-gray-600 hover:text-gray-800 mb-4">
           <FaChevronLeft className="inline mr-1" />
           <span className="ml-2">Back to Rooms</span>
         </Link>
@@ -70,23 +64,19 @@ const RoomDetails = () => {
 
             <ul className="space-y-2">
               <li>
-                <span className="font-semibold text-gray-800">Size:</span>{" "}
-                {room.sqft}
+                <span className="font-semibold text-gray-800">Size:</span> {room.sqft}
                 sq ft
               </li>
               <li>
-                <span className="font-semibold text-gray-800">
-                  Availability:
-                </span>
+                <span className="font-semibold text-gray-800">Availability:</span>
                 {room.availability}
               </li>
               <li>
-                <span className="font-semibold text-gray-800">Price:</span>$
-                {room.price_per_hour}/hour
+                <span className="font-semibold text-gray-800">Price:</span>${room.price_per_hour}
+                /hour
               </li>
               <li>
-                <span className="font-semibold text-gray-800">Address:</span>{" "}
-                {room.address}
+                <span className="font-semibold text-gray-800">Address:</span> {room.address}
               </li>
             </ul>
           </div>

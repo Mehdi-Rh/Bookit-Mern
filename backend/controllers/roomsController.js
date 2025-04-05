@@ -1,14 +1,14 @@
-const Room = require("../models/roomModel.js");
-const mongoose = require("mongoose");
+const Room = require('../models/roomModel.js');
+const mongoose = require('mongoose');
 
 // Get all rooms
 const getRooms = async (req, res) => {
   try {
     const page = parseInt(req.query.page) - 1 || 0;
     const limit = parseInt(req.query.limit) || 5;
-    const search = req.query.search || "";
-    let sort = req.query.sort || "roomId";
-    const sortBy = req.query.sortBy || "asc";
+    const search = req.query.search || '';
+    let sort = req.query.sort || 'roomId';
+    const sortBy = req.query.sortBy || 'asc';
 
     // let statusIds = req.query.status_ids || "All";
     // let categoryIds = req.query.category_ids || "All";
@@ -78,12 +78,11 @@ const getRooms = async (req, res) => {
       // categories: categoryOptions,
       // statuses: statusOptions,
     };
-    console.log({ response });
 
     res.status(200).json(response);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Internal Server Error" + err });
+    res.status(500).json({ error: 'Internal Server Error' + err });
   }
 };
 
@@ -92,65 +91,69 @@ const getRoom = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).send("No such room found");
+    return res.status(404).send('No such room found');
   }
   const room = await Room.findById(id);
 
   if (!room) {
-    return res.status(404).send("No such room found");
+    return res.status(404).send('No such room found');
   }
   res.status(200).json(room);
 };
 
 // Create new room
 const createRoom = async (req, res) => {
-  const { title, description, category, dueDate, status } = req.body;
+  const {
+    name,
+    description,
+    sqft,
+    capacity,
+    location,
+    address,
+    amenities,
+    availability,
+    price_per_hour,
+    user_id,
+    image,
+  } = req.body;
 
   let emptyFields = [];
 
-  if (!title) {
-    emptyFields.push("title");
-  }
-  if (!description) {
-    emptyFields.push("description");
-  }
-  if (!category) {
-    emptyFields.push("category");
-  }
-  if (!dueDate) {
-    emptyFields.push("dueDate");
-  }
-  if (!status) {
-    emptyFields.push("status");
-  }
+  // if (!title) {
+  //   emptyFields.push("title");
+  // }
+  // if (!description) {
+  //   emptyFields.push("description");
+  // }
+  // if (!category) {
+  //   emptyFields.push("category");
+  // }
+  // if (!dueDate) {
+  //   emptyFields.push("dueDate");
+  // }
+  // if (!status) {
+  //   emptyFields.push("status");
+  // }
   if (emptyFields.length > 0) {
-    return res
-      .status(400)
-      .json({ error: "Please fill in all fields", emptyFields });
+    return res.status(400).json({ error: 'Please fill in all fields', emptyFields });
   }
 
   // add to the database
   try {
-    const userId = req.user._id;
-    const userLastRoomIdNbr = req.user.lastRoomIdNbr;
-    console.log({ name: req.user });
-    const roomIdPrefix = req.user.name
-      .split(" ")
-      .map((word) => word[0])
-      .join("");
     const room = await Room.create({
-      roomId: roomIdPrefix + "-" + userLastRoomIdNbr,
-      title,
+      name,
       description,
-      category,
-      dueDate,
-      status,
-      userId,
+      sqft,
+      capacity,
+      location,
+      address,
+      amenities,
+      availability,
+      price_per_hour,
+      user_id,
+      image,
     });
-    const user = await User.findOneAndUpdate(
-      { _id: userId },
-      { ...req.user, lastRoomIdNbr: lastRoomIdNbr + 1 }
-    );
+
     res.status(200).json(room);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -161,13 +164,13 @@ const createRoom = async (req, res) => {
 const deleteRoom = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).send("No such room found");
+    return res.status(404).send('No such room found');
   }
 
   const room = await Room.findOneAndDelete({ _id: id });
 
   if (!room) {
-    return res.status(404).send("No such room found");
+    return res.status(404).send('No such room found');
   }
 
   res.status(200).json(room);
@@ -177,7 +180,7 @@ const deleteRoom = async (req, res) => {
 const updateRoom = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).send("No such room found");
+    return res.status(404).send('No such room found');
   }
 
   const room = await Room.findOneAndUpdate(

@@ -11,7 +11,6 @@ export const useLogin = () => {
     setError(null);
 
     const baseUrl = import.meta.env.VITE_API_URL;
-    console.log({ baseUrl });
     const response = await fetch(`${baseUrl}/api/user/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

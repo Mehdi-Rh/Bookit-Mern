@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    },
     "noEmit": true,
     "esModuleInterop": true,
     "skipLibCheck": true,

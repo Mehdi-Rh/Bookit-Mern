@@ -5,11 +5,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import RoomDetails from './pages/rooms/RoomDetails';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
-import AddRooms from './pages/rooms/AddRooms';
+import AddRoom from './pages/rooms/AddRoom';
 import Home from './pages/rooms/Home';
 import MyRooms from './pages/rooms/MyRooms';
 import BookingsPage from './pages/bookings/BookingsPage';
-import { useAuthContext } from './hooks/useAuthContext.js';
+import { useAuthContext } from '@/hooks/auth/useAuthContext';
 
 function App() {
   const { user } = useAuthContext();
@@ -27,7 +27,7 @@ function App() {
                 path="/rooms/:id"
                 element={user ? <RoomDetails /> : <Navigate to="/login" />}
               />
-              <Route path="/rooms/add" element={user ? <AddRooms /> : <Navigate to="/login" />} />
+              <Route path="/rooms/add" element={user ? <AddRoom /> : <Navigate to="/login" />} />
               <Route path="/rooms/my" element={user ? <MyRooms /> : <Navigate to="/login" />} />
               <Route
                 path="/bookings"

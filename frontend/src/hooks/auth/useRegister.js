@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useAuthContext } from "./useAuthContext";
+import { useState } from 'react';
+import { useAuthContext } from './useAuthContext';
 
 export const useRegister = () => {
   const [error, setError] = useState(null);
@@ -13,8 +13,8 @@ export const useRegister = () => {
     const apiUrl = import.meta.env.VITE_API_URL;
 
     const response = await fetch(`${apiUrl}/api/user/signup`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password }),
     });
 
@@ -24,14 +24,14 @@ export const useRegister = () => {
       setError(json.error);
     } else if (response.ok) {
       // save the user to the local storage
-      localStorage.setItem("user", JSON.stringify(json));
+      localStorage.setItem('user', JSON.stringify(json));
 
       // update the useCoontext
-      dispatch({ type: "LOGIN", payload: json });
+      dispatch({ type: 'LOGIN', payload: json });
 
       setIsLoading(false);
     }
   };
 
-  return { signup, isLoading, error, namez: "mehdi" };
+  return { signup, isLoading, error, namez: 'mehdi' };
 };

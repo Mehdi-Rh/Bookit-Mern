@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 // import { useAuth } from "@/context/authContext";
 import { Link, redirect } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { useLogin } from '../../hooks/useLogin';
+import { useLogin } from '../../hooks/auth/useLogin';
 
 const LoginPage = () => {
   const {
@@ -17,12 +17,9 @@ const LoginPage = () => {
 
   const { login } = useLogin();
   const onSubmit = async (data) => {
-    console.log({ data });
-
     await login(data.email, data.password);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(data);
     } catch (error) {
       // setError('root', {
       //   message: 'This email is already taken',

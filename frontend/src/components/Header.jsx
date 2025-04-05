@@ -4,8 +4,8 @@ import { FaUser, FaSignInAlt, FaSignOutAlt, FaBuilding } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 // import destroySession from "@/app/actions/destroySession";
 import logo from '../assets/logo.svg';
-import { useAuthContext } from '../hooks/useAuthContext';
-import { useLogout } from '../hooks/useLogout';
+import { useLogout } from '../hooks/auth/useLogout';
+import { useAuthContext } from '@/hooks/auth/useAuthContext';
 
 const Header = () => {
   // const router = useRouter();

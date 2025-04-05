@@ -1,20 +1,18 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { Link, redirect } from "react-router";
-import { useRegister } from "../../hooks/useRegister";
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { Link, redirect } from 'react-router';
+import { useRegister } from '../../hooks/auth/useRegister';
 // import createUser from '@/app/actions/createUser';
 
 const RegisterPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const { signup, error, isLoading, namez } = useRegister();
-
-  console.log({ namez });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,22 +22,17 @@ const RegisterPage = () => {
   useEffect(() => {
     if (error) toast.error(error);
     // if (errors) toast.error("An error occurred");
-    toast.success("You can now log in!");
-    redirect("/login");
+    toast.success('You can now log in!');
+    redirect('/login');
   }, [error, isLoading]);
 
   return (
     <div className="flex items-center justify-center w-auto md:w-md">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-sm mt-20">
         <form onSubmit={handleSubmit}>
-          <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-            Register
-          </h2>
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Register</h2>
           <div className="mb-4">
-            <label
-              htmlFor="name"
-              className="block text-gray-700 font-bold mb-2"
-            >
+            <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
               Name
             </label>
             <input
@@ -53,10 +46,7 @@ const RegisterPage = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 font-bold mb-2"
-            >
+            <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
               Email
             </label>
             <input
@@ -72,10 +62,7 @@ const RegisterPage = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 font-bold mb-2"
-            >
+            <label htmlFor="password" className="block text-gray-700 font-bold mb-2">
               Password
             </label>
             <input
