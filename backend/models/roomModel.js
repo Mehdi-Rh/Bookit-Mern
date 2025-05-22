@@ -21,11 +21,11 @@ const roomSchema = new Schema(
       required: true,
     },
     sqft: {
-      type: Date,
+      type: Number,
       required: false,
     },
     capacity: {
-      type: String,
+      type: Number,
       required: true,
     },
     location: {
@@ -45,7 +45,7 @@ const roomSchema = new Schema(
       required: true,
     },
     price_per_hour: {
-      type: String,
+      type: Number,
       required: true,
     },
     image: {
