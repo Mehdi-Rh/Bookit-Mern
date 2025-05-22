@@ -13,6 +13,16 @@ import { useAuthContext } from '@/hooks/auth/useAuthContext';
 
 function App() {
   const { user } = useAuthContext();
+
+  if (user === undefined)
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="text-lg font-semibold">Loading...</span>
+      </div>
+    );
+
+  const noUser = user === null;
+
   return (
     <Router>
       <div className=" h-full">
@@ -20,21 +30,21 @@ function App() {
         <div className="flex justify-between flex-col ">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <Routes>
-              <Route path="login" element={!user ? <Login /> : <Navigate to="/" />} />
-              <Route path="register" element={!user ? <Register /> : <Navigate to="/" />} />
-              <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
+              <Route path="login" element={noUser ? <Login /> : <Navigate to="/" />} />
+              <Route path="register" element={noUser ? <Register /> : <Navigate to="/" />} />
+              <Route path="/" element={!noUser ? <Home /> : <Navigate to="/login" />} />
               <Route
                 path="/rooms/:id"
-                element={user ? <RoomDetails /> : <Navigate to="/login" />}
+                element={!noUser ? <RoomDetails /> : <Navigate to="/login" />}
               />
-              <Route path="/rooms/add" element={user ? <AddRoom /> : <Navigate to="/login" />} />
+              <Route path="/rooms/add" element={!noUser ? <AddRoom /> : <Navigate to="/login" />} />
               <Route
                 path="/rooms/my-rooms"
-                element={user ? <MyRooms /> : <Navigate to="/login" />}
+                element={!noUser ? <MyRooms /> : <Navigate to="/login" />}
               />
               <Route
                 path="/bookings"
-                element={user ? <BookingsPage /> : <Navigate to="/login" />}
+                element={!noUser ? <BookingsPage /> : <Navigate to="/login" />}
               />
             </Routes>
           </div>
