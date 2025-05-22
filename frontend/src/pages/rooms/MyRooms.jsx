@@ -24,7 +24,7 @@ const MyRooms = () => {
     <>
       <Heading title="Available Rooms" />
       {rooms.length > 0 ? (
-        rooms.map((room) => <RoomCard room={room} key={room._id} />)
+        rooms.map((room) => <RoomCard room={room} key={room._id} sourcePage="my-rooms" />)
       ) : (
         <p>No rooms available at the moment</p>
       )}

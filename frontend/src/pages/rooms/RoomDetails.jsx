@@ -52,7 +52,7 @@ const RoomDetails = () => {
 
         <div className="flex flex-col sm:flex-row sm:space-x-6">
           <img
-            src={imageSrc}
+            src={room.image}
             alt={room.name}
             width={400}
             height={100}

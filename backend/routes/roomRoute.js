@@ -23,12 +23,12 @@ router.get('/my-rooms', getUserRooms);
 router.get('/:id', getRoom);
 
 // POST a new room
-router.post('/', createRoom);
+router.post('/add', createRoom);
 
 // Delete a room
-router.delete('/:id', deleteRoom);
+router.delete('/remove/:id', deleteRoom);
 
 // Update a room
-router.patch('/:id', updateRoom);
+router.patch('/edit/:id', updateRoom);
 
 module.exports = router;
