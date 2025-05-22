@@ -83,7 +83,7 @@ const Header = () => {
 
               {user && (
                 <>
-                  <Link to="/rooms/my">
+                  <Link to="/rooms/my-rooms">
                     <FaBuilding className="inline mr-1" /> My Rooms
                   </Link>
                   <button

@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 const {
@@ -7,25 +7,28 @@ const {
   getRooms,
   deleteRoom,
   updateRoom,
-} = require("../controllers/roomsController");
+  getUserRooms,
+} = require('../controllers/roomsController');
 
 // const requireAuth = require("../middleware/requireAuth");
 
 // router.use(requireAuth);
 
 // Get all rooms
-router.get("/", getRooms);
+router.get('/', getRooms);
+
+router.get('/my-rooms', getUserRooms);
 
 // Get a specific room
-router.get("/:id", getRoom);
+router.get('/:id', getRoom);
 
 // POST a new room
-router.post("/", createRoom);
+router.post('/', createRoom);
 
 // Delete a room
-router.delete("/:id", deleteRoom);
+router.delete('/:id', deleteRoom);
 
 // Update a room
-router.patch("/:id", updateRoom);
+router.patch('/:id', updateRoom);
 
 module.exports = router;

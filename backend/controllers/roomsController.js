@@ -193,10 +193,42 @@ const updateRoom = async (req, res) => {
   res.status(200).json(room);
 };
 
+const getUserRooms = async (req, res) => {
+  const userId = req.query.userId;
+
+  try {
+    const page = parseInt(req.query.page) - 1 || 0;
+    const limit = parseInt(req.query.limit) || 5;
+    const search = req.query.search || '';
+    let sort = req.query.sort || 'roomId';
+    const sortBy = req.query.sortBy || 'asc';
+
+    const rooms = await Room.find({ user_id: userId });
+
+    const total = await Room.countDocuments({});
+
+    const response = {
+      error: null,
+      total,
+      page: page + 1,
+      limit,
+      rooms,
+      // categories: categoryOptions,
+      // statuses: statusOptions,
+    };
+
+    res.status(200).json(response);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' + err });
+  }
+};
+
 module.exports = {
   getRooms,
   getRoom,
   createRoom,
   deleteRoom,
   updateRoom,
+  getUserRooms,
 };

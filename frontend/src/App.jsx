@@ -28,7 +28,10 @@ function App() {
                 element={user ? <RoomDetails /> : <Navigate to="/login" />}
               />
               <Route path="/rooms/add" element={user ? <AddRoom /> : <Navigate to="/login" />} />
-              <Route path="/rooms/my" element={user ? <MyRooms /> : <Navigate to="/login" />} />
+              <Route
+                path="/rooms/my-rooms"
+                element={user ? <MyRooms /> : <Navigate to="/login" />}
+              />
               <Route
                 path="/bookings"
                 element={user ? <BookingsPage /> : <Navigate to="/login" />}
