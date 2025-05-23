@@ -12,9 +12,9 @@ import BookingsPage from './pages/bookings/BookingsPage';
 import { useAuthContext } from '@/hooks/auth/useAuthContext';
 
 function App() {
-  const { user } = useAuthContext();
+  const { user, isUserLoading } = useAuthContext();
 
-  if (user === undefined)
+  if (isUserLoading)
     return (
       <div className="flex items-center justify-center min-h-screen">
         <span className="text-lg font-semibold">Loading...</span>
