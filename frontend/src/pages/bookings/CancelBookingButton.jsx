@@ -1,26 +1,28 @@
-"use client";
-import { toast } from "react-toastify";
+'use client';
+import useRemoveBooking from '@/hooks/bookings/useRemoveRoom';
+import { toast } from 'react-toastify';
 // import cancelBooking from "@/app/actions/cancelBooking";
 
 const CancelBookingButton = ({ bookingId }) => {
+  const { removeBooking } = useRemoveBooking();
   const handleCancelClick = async () => {
-    if (!confirm("Are you sure you want to cancel this booking?")) {
+    if (!confirm('Are you sure you want to cancel this booking?')) {
       return;
     }
 
-    const cancelBooking = async (bookingId) => {
-      console.log({ bookingId });
-    };
+    // const cancelBooking = async (bookingId) => {
+    //   removeBooking(bookingId);
+    // };
     try {
-      const result = await cancelBooking(bookingId);
+      const result = await removeBooking(bookingId);
 
       if (result.success) {
-        toast.success("Booking cancelled successfully!");
+        toast.success('Booking cancelled successfully!');
       }
     } catch (error) {
-      console.log("Failed to cancel booking", error);
+      console.log('Failed to cancel booking', error);
       return {
-        error: "Failed to cancel booking",
+        error: 'Failed to cancel booking',
       };
     }
   };
