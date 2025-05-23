@@ -6,10 +6,11 @@ const BookedRoomCard = ({ booking }) => {
   const { room_id } = booking;
 
   const [room, setRoom] = useState(null);
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const getRoom = async () => {
-      const response = await fetch(`http://localhost:5000/api/rooms/${room_id}`);
+      const response = await fetch(`${baseUrl}/rooms/${room_id}`);
 
       const data = await response.json();
 

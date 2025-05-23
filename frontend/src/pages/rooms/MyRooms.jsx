@@ -7,10 +7,11 @@ const MyRooms = () => {
   const [rooms, setRooms] = useState([]);
 
   const { user } = useAuthContext();
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const getMyRooms = async () => {
-      const response = await fetch(`http://localhost:5000/api/rooms/my-rooms?userId=${user._id}`);
+      const response = await fetch(`${baseUrl}/rooms/my-rooms?userId=${user._id}`);
       const data = await response.json();
 
       console.log({ data });

@@ -1,15 +1,16 @@
-import RoomCard from "../../components/RoomCard";
-import Heading from "../../components/Heading";
-import { useEffect, useState } from "react";
+import RoomCard from '../../components/RoomCard';
+import Heading from '../../components/Heading';
+import { useEffect, useState } from 'react';
 
 const Home = () => {
   // const rooms = await getAllRooms();
 
   const [rooms, setRooms] = useState([]);
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const getAllRooms = async () => {
-      const response = await fetch("http://localhost:5000/api/rooms/");
+      const response = await fetch(`${baseUrl}/rooms/`);
       const data = await response.json();
       setRooms(data.rooms);
     };

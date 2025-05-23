@@ -14,10 +14,11 @@ const RoomDetails = () => {
   const { id } = params;
 
   const [room, setRoom] = useState(null);
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const getRoom = async () => {
-      const response = await fetch(`http://localhost:5000/api/rooms/${id}`);
+      const response = await fetch(`${baseUrl}/rooms/${id}`);
 
       const data = await response.json();
 
