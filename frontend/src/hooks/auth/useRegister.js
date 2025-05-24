@@ -16,7 +16,7 @@ export const useRegister = () => {
     const { json, response } = await apiFetch(`/user/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name: name.trim(), email: email.trim(), password: password.trim() }),
     });
 
     if (!response.ok) {

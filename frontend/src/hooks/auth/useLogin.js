@@ -13,10 +13,10 @@ export const useLogin = () => {
     setIsLoading(true);
     setError(null);
 
-    const { json, response } = await apiFetch(`/user/login`, {
+    const { json, response } = await apiFetch('/user/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email: email.trim(), password: password.trim() }),
     });
 
     if (!response.ok) {
