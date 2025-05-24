@@ -12,19 +12,12 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { signup, error, isLoading, namez } = useRegister();
+  const { signup, error, isLoading } = useRegister();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signup(name, email, password);
   };
-
-  useEffect(() => {
-    if (error) toast.error(error);
-    // if (errors) toast.error("An error occurred");
-    toast.success('You can now log in!');
-    redirect('/login');
-  }, [error, isLoading]);
 
   return (
     <div className="flex items-center justify-center w-auto md:w-md">

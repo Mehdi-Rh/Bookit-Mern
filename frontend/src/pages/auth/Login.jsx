@@ -18,23 +18,7 @@ const LoginPage = () => {
   const { login } = useLogin();
   const onSubmit = async (data) => {
     await login(data.email, data.password);
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    } catch (error) {
-      // setError('root', {
-      //   message: 'This email is already taken',
-      // });
-    }
   };
-
-  useEffect(() => {
-    if (errors) toast.error(errors);
-    if (isSubmitSuccessful) {
-      toast.success('Logged in successfully!');
-      // setIsAuthenticated(true);
-      redirect('/');
-    }
-  }, [errors, isSubmitSuccessful]);
 
   return (
     <div className="flex items-center justify-center w-auto md:w-md">

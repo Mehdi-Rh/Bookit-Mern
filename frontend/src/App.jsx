@@ -10,6 +10,7 @@ import Home from './pages/rooms/Home';
 import MyRooms from './pages/rooms/MyRooms';
 import BookingsPage from './pages/bookings/BookingsPage';
 import { useAuthContext } from '@/hooks/auth/useAuthContext';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const { user, isUserLoading } = useAuthContext();
@@ -51,6 +52,7 @@ function App() {
             </Routes>
           </div>
           <Footer />
+          <ToastContainer />
         </div>
       </div>
     </Router>
