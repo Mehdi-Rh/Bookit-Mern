@@ -4,15 +4,18 @@ import { useEffect, useState } from 'react';
 import { apiFetch } from '@/data/api';
 
 const Home = () => {
-  // const rooms = await getAllRooms();
-
   const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getAllRooms = async () => {
-      const { json } = await apiFetch(`/rooms/`);
-
-      setRooms(json.rooms);
+      setLoading(true);
+      try {
+        const { json } = await apiFetch(`/rooms/`);
+        setRooms(json.rooms);
+      } finally {
+        setLoading(false);
+      }
     };
 
     getAllRooms();
@@ -21,7 +24,12 @@ const Home = () => {
   return (
     <>
       <Heading title="Available Rooms" />
-      {rooms.length > 0 ? (
+
+      {loading ? (
+        <div className="flex items-center justify-center mt-32">
+          <span className="text-lg font-semibold">Loading...</span>
+        </div>
+      ) : rooms.length > 0 ? (
         rooms.map((room) => <RoomCard room={room} key={room._id} />)
       ) : (
         <p>No rooms available at the moment</p>
