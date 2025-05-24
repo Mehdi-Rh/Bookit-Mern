@@ -1,5 +1,5 @@
 // import { useRouter } from "next/navigation";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // import { useFormState } from "react-dom";
 import { toast } from 'react-toastify';
 // import createSession from "../actions/createSession";
@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { Link, redirect } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { useLogin } from '../../hooks/auth/useLogin';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 const LoginPage = () => {
   const {
@@ -15,9 +16,12 @@ const LoginPage = () => {
     formState: { errors, isSubmitSuccessful },
   } = useForm();
 
+  const [loading, setLoading] = useState(false);
+
   const { login } = useLogin();
   const onSubmit = async (data) => {
-    await login(data.email, data.password);
+    setLoading(true);
+    await login(data.email, data.password, setLoading);
   };
 
   return (
@@ -59,11 +63,11 @@ const LoginPage = () => {
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
             >
-              Login
+              {!loading ? 'Login' : <LoadingSpinner />}
             </button>
 
             <p>
-              No account?
+              No account?{' '}
               <Link to="/register" className="text-blue-500">
                 Register
               </Link>

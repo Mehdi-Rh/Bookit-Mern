@@ -9,7 +9,7 @@ export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { dispatch } = useAuthContext();
 
-  const login = async (email, password) => {
+  const login = async (email, password, setLoading) => {
     setIsLoading(true);
     setError(null);
 
@@ -34,6 +34,7 @@ export const useLogin = () => {
       toast.success('Logged in successfully!');
       setIsLoading(false);
     }
+    setLoading(false);
   };
 
   return { login, isLoading, error };

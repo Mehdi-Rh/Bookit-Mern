@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { Link, redirect } from 'react-router';
 import { useRegister } from '../../hooks/auth/useRegister';
+import LoadingSpinner from '@/components/LoadingSpinner';
 // import createUser from '@/app/actions/createUser';
 
 const RegisterPage = () => {
@@ -12,7 +13,7 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { signup, error, isLoading } = useRegister();
+  const { signup, isLoading } = useRegister();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,11 +94,11 @@ const RegisterPage = () => {
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
               disabled={isLoading || false}
             >
-              Register
+              {!isLoading ? 'Register' : <LoadingSpinner />}
             </button>
 
             <p>
-              Have an account?
+              Have an account?{' '}
               <Link to="/login" className="text-blue-500">
                 Login
               </Link>
