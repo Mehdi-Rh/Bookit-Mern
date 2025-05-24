@@ -28,7 +28,7 @@ function App() {
 
   return (
     <Router>
-      <div className=" h-full">
+      <div className="h-auto  ">
         <Header />
         <div className="flex justify-between flex-col ">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">

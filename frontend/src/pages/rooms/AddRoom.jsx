@@ -62,7 +62,7 @@ const AddRoom = () => {
   return (
     <>
       <Heading title="Add a Room" />
-      <div className="bg-white shadow-lg rounded-lg p-6 w-120">
+      <div className="bg-white shadow-lg rounded-lg p-6 ">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label htmlFor="name" className="block text-gray-700 font-bold mb-2">

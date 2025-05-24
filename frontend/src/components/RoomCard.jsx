@@ -7,7 +7,7 @@ const RoomCard = ({ room, sourcePage = null }) => {
   const { removeRoom } = useRemoveRoom();
 
   return (
-    <div className="bg-white shadow rounded-lg p-4 mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+    <div className="w-full max-w-full overflow-x-auto bg-white shadow rounded-lg p-4 mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center">
       <div className="flex flex-col sm:flex-row sm:space-x-4">
         <img
           src={room.image}
